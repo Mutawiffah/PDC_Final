@@ -5,4 +5,32 @@
 | gRPC              | Protobuf      | Fastest         | Binary         |
 | gRPC Microservice | Binary        | Slight overhead | Scalable       |
 
+Performance Analysis
+
+1️⃣ Simulated Measurements
+| Method                | Response Time (ms) | Payload Size               | Network Calls / Batching            | Type Safety / Integration Ease              |
+| --------------------- | ------------------ | -------------------------- | ----------------------------------- | ------------------------------------------- |
+| **REST**              | 3–5                | JSON (larger)              | Single/batch supported              | Easy to implement, no type safety           |
+| **tRPC (conceptual)** | 2–4                | JSON (slightly smaller)    | Single/batch supported              | Type-safe with TypeScript, easy integration |
+| **gRPC unary (mock)** | 1–3                | Protobuf (binary, smaller) | Single request                      | Requires setup, high efficiency             |
+| **gRPC microservice** | 2–4                | Protobuf (binary)          | Internal calls (service-to-service) | Decoupled, scalable, requires setup         |
+
+Notes:
+
+Numbers are simulated from our mock API Service using endToEndMs.
+
+Payload size: JSON is text-based (larger), Protobuf is binary (smaller).
+
+Network calls: REST/tRPC can handle batches; gRPC unary is usually one request per call.
+
+Type safety: tRPC > gRPC > REST (for TypeScript projects).
+
+2️⃣ Conceptual Comparison
+| Feature                  | REST       | tRPC          | gRPC unary      | gRPC microservice |
+| ------------------------ | ---------- | ------------- | --------------- | ----------------- |
+| Serialization efficiency | Low (JSON) | Medium (JSON) | High (Protobuf) | High (Protobuf)   |
+| Ease of implementation   | Easy       | Medium        | Medium          | Medium/Hard       |
+| Scalability              | Medium     | Medium        | High            | Very High         |
+| Decoupling               | Low        | Medium        | High            | Very High         |
+| Type safety              | None       | Strong        | Medium          | Medium            |
 
