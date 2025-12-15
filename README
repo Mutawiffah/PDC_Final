@@ -1,0 +1,8 @@
+| API               | Payload       | Speed           | Notes          |
+| ----------------- | ------------- | --------------- | -------------- |
+| REST              | JSON + Base64 | Slowest         | Human readable |
+| tRPC              | JSON          | Faster          | Type safe      |
+| gRPC              | Protobuf      | Fastest         | Binary         |
+| gRPC Microservice | Binary        | Slight overhead | Scalable       |
+
+
